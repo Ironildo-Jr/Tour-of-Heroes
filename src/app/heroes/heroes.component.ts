@@ -9,7 +9,7 @@ import { Hero } from '../hero.model';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
-  hero?: Hero;
+  idHeroSelcted: Number = 0;
 
   constructor(private heroService: HeroService) {}
 
@@ -17,7 +17,7 @@ export class HeroesComponent implements OnInit {
     this.heroService.getAll().subscribe(x => this.heroes = x)
   }
 
-  selectHero(hero: Hero) {
-    this.hero = hero;
+  selectHero(id: Number) {
+    this.idHeroSelcted = id;
   }
 }
