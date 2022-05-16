@@ -24,9 +24,9 @@ export class HeroService {
     this.messageService.add(`HeroService: fetched id ${id}`)
     return this.httpClient.get<Hero>(`${this.url}/${id}`);
   }
-  save(hero: Hero) {
+  save(hero?: Hero) {
     this.messageService.add('HeroService: saved hero')
-    if (hero.id) {
+    if (hero) {
       return this.httpClient.put<Hero>(`${this.url}/${hero.id}`, hero);
     }
     return this.httpClient.post<Hero>(this.url, hero);
