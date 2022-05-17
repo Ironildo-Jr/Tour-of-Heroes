@@ -1,39 +1,43 @@
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 50px;
-  background-color: rgba(255, 255, 255, 0.774);
-  color: rgb(85, 85, 85);
+  width: max-content;
+  background-color: rgba(136, 136, 136, 0.767);
+  color: rgb(255, 255, 255);
   text-align: center;
-  padding: 3px;
+  padding: 2px 4px 2px 4px;
   border-radius: 6px;
-
-  /* Position the tooltip text */
   position: absolute;
-  z-index: 1;
-  bottom: 20%;
-  left: 25%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext.positionHeroes{
+  right: 0.5em;
+  top: 8%
+}
+
+.tooltip .tooltiptext.positionDashBoard{
+  right: 2.7em;
+  top: 8%
+}
+
+.tooltip .tooltiptext.positionHeroes::after{
+  right: 40%;
+  bottom: 100%;
+}
+
+.tooltip .tooltiptext.positionDashBoard::after{
+  right: 40%;
+  bottom: 100%;
 }
 
 /* Tooltip arrow */
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
-  top: 30%;
-  left: 109%;
-  margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent transparent rgba(255, 255, 255, 0.774);
+  border-color: transparent transparent rgba(136, 136, 136, 0.767) transparent ;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -52,25 +56,49 @@
   justify-content: space-between;
 }
 
-#header i{
-  margin: 20px;
+#header div{
+  margin-right: 2%;
+  display: flex;
 }
 
-#header span:active{
+.icone{
+  margin-left: 1.5rem;
+  position: relative;
+  border-radius: 4em;
+  cursor:pointer;
+  user-select:none;
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.418);
-  border-radius: 100px;
-  height: 40px;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s; /* Safari */
+}
+
+.icone:after {
+  content: "";
+  position: absolute;
+  border-radius: 4em;
+  left: 2px;
+  top:-7px;
+  width: 15px;
+  height: 15px;
+  opacity: 0;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px 10px white;
+}
+
+.icone:active:after {
+  box-shadow: 0 0 0 0 white;
+  position: absolute;
+  border-radius: 4em;
+  left: 2px;
+  top:-7px;
+  opacity: 1;
+  transition: 0s;
 }
 
 #header h1{
   margin: 0px;
 }
 
-#main div{
-  background-color: rgb(255, 255, 255);
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
-}
+
