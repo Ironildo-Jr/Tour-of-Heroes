@@ -9,7 +9,6 @@ import { Hero } from '../hero.model';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
-  idHeroSelcted: Number = 0;
 
   constructor(private heroService: HeroService) {}
 
@@ -19,9 +18,5 @@ export class HeroesComponent implements OnInit {
 
   getHeros() {
     this.heroService.getAll().subscribe((x) => (this.heroes = x));
-  }
-
-  selectHero(id: Number) {
-    this.idHeroSelcted = id;
   }
 }

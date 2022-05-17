@@ -1,4 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Hero } from '../hero.model';
 import { HeroService } from '../hero.service';
 
@@ -7,20 +9,25 @@ import { HeroService } from '../hero.service';
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css'],
 })
-export class HeroDetailComponent implements OnChanges {
-  @Input() id: Number = 0;
-  hero?: Hero;
+export class HeroDetailComponent implements OnInit {
+  hero!: Hero;
 
-  constructor(private heroService: HeroService) {}
+  constructor(
+    private heroService: HeroService,
+    private route: ActivatedRoute,
+    private locale: Location
+  ) {}
 
-  ngOnChanges(): void {
-    this.getHero(this.id);
+  ngOnInit(): void {
+    this.getHero();
   }
 
-  getHero(id: Number) {
-    if (id > 0) {
-      this.heroService.getById(id).subscribe((x) => (this.hero = x));
-    }
-    this.hero = undefined;
+  getHero() {
+    const id: Number = Number(this.route.snapshot.paramMap.get('id'));
+    this.heroService.getById(id).subscribe((x) => (this.hero = x));
+  }
+
+  goBack() {
+    this.locale.back();
   }
 }
