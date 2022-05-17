@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container .card {
+  width: 25%;
+  text-align: center;
+}
+
+@media (max-width: 600px)
+{
+  .container
+   {
+    display: block;
+   }
+
+   .container .card {
+    width: auto;
+    text-align: center;
+  }
+}
