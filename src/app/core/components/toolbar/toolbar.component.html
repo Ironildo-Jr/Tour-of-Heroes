@@ -1,0 +1,12 @@
+<header id="header">
+  <h1>{{ title }}</h1>
+  <div>
+    <div class="tooltip" *ngFor="let menuIcon of menuIcons">
+      <i
+        class="{{menuIcon.icon}} fa-lg icone"
+        [routerLink]="[menuIcon.url]"
+      ></i>
+      <span class="tooltiptext">{{ menuIcon.toolTipText }}</span>
+    </div>
+  </div>
+</header>

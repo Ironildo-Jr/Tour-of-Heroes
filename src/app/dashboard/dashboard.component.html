@@ -1,3 +1,5 @@
 <div class="container">
-  <div class="card" *ngFor="let h of heroes" routerLink="/heroes/{{ h.id }}">{{ h.name }}</div>
+  <div class="card" *ngFor="let h of heroes" [routerLink]="['/heroes/', h.id]">
+    {{ h.name }}
+  </div>
 </div>

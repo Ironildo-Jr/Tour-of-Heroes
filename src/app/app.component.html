@@ -1,19 +1,4 @@
-<header id="header">
-  <h1>{{ title }}</h1>
-
-  <div>
-    <div class="tooltip">
-      <i class="fa-brands fa-trello fa-lg icone" routerLink="/dashboard"></i>
-      <span class="tooltiptext positionDashBoard">DashBoard</span>
-    </div>
-
-    <div class="tooltip">
-      <i class="fa-solid fa-mask fa-lg icone" routerLink="/heroes"></i>
-      <span class="tooltiptext positionHeroes">Heroes</span>
-    </div>
-  </div>
-</header>
-
+<app-toolbar [title]="title" [menuIcons]="menuIcons"></app-toolbar>
 <main>
   <router-outlet></router-outlet>
   <app-messages></app-messages>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Hero } from './hero.model';
+import { Hero } from '../models/hero.model';
 import { MessageService } from './message.service';
 import { Observable } from 'rxjs';
 
@@ -15,17 +15,18 @@ export class HeroService {
     private messageService: MessageService
   ) {}
 
-  getAll() {
-    this.messageService.add('HeroService: fetched heroes')
+  getAll(): Observable<Hero[]> {
+    this.messageService.add('HeroService: fetched heroes');
     return this.httpClient.get<Hero[]>(this.url);
   }
 
-  getById(id: Number) {
-    this.messageService.add(`HeroService: fetched id ${id}`)
+  getById(id: Number): Observable<Hero> {
+    this.messageService.add(`HeroService: fetched id ${id}`);
     return this.httpClient.get<Hero>(`${this.url}/${id}`);
   }
+
   save(hero?: Hero) {
-    this.messageService.add('HeroService: saved hero')
+    this.messageService.add('HeroService: saved hero');
     if (hero) {
       return this.httpClient.put<Hero>(`${this.url}/${hero.id}`, hero);
     }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuIcon } from './core/models/menuIcon.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Tour of Heroes';
+  menuIcons: MenuIcon[] = [
+    {
+      icon: "fa-brands fa-trello",
+      toolTipText: "DashBoard",
+      url: "/dashboard"
+    },
+    {
+      icon: "fa-solid fa-mask",
+      toolTipText: "Heroes",
+      url: "/heroes"
+    }
+  ]
 }
