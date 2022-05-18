@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Hero } from '../models/hero.model';
 import { MessageService } from './message.service';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeroService {
-  private url: string = 'api/heroes';
+  private url: string = `${environment.baseUrl}/heroes`;
 
   constructor(
     private httpClient: HttpClient,
@@ -16,13 +17,15 @@ export class HeroService {
   ) {}
 
   getAll(): Observable<Hero[]> {
-    this.messageService.add('HeroService: fetched heroes');
-    return this.httpClient.get<Hero[]>(this.url);
+    return this.httpClient
+      .get<Hero[]>(this.url)
+      .pipe(tap((h) => this.log(`feched ${h.length} hero(es)`)));
   }
 
   getById(id: Number): Observable<Hero> {
-    this.messageService.add(`HeroService: fetched id ${id}`);
-    return this.httpClient.get<Hero>(`${this.url}/${id}`);
+    return this.httpClient
+      .get<Hero>(`${this.url}/${id}`)
+      .pipe(tap((h) => this.log(`feched hero id. ${h.id}`)));
   }
 
   save(hero?: Hero) {
@@ -31,5 +34,9 @@ export class HeroService {
       return this.httpClient.put<Hero>(`${this.url}/${hero.id}`, hero);
     }
     return this.httpClient.post<Hero>(this.url, hero);
+  }
+
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
   }
 }
