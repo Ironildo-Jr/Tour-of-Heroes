@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HeroService {
-  url: string = 'http://localhost:3001/heroes';
+  private url: string = 'api/heroes';
 
   constructor(
     private httpClient: HttpClient,
