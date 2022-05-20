@@ -1,5 +1,5 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Hero } from 'src/app/core/models/hero.model';
 import { HeroService } from 'src/app/core/services/hero.service';
@@ -11,6 +11,7 @@ import { HeroService } from 'src/app/core/services/hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   hero!: Hero;
+  isCreating!: boolean;
 
   constructor(
     private heroService: HeroService,
@@ -23,8 +24,25 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getHero() {
-    const id: Number = Number(this.route.snapshot.paramMap.get('id'));
-    this.heroService.getById(id).subscribe((x) => (this.hero = x));
+    const paramId = this.route.snapshot.paramMap.get('id');
+    if (paramId == 'new') {
+      this.isCreating = true;
+      this.hero = { id: 0, name: '' };
+    } else {
+      this.isCreating = false;
+      const id: number = Number(paramId);
+      this.heroService.getById(id).subscribe((x) => (this.hero = x));
+    }
+  }
+
+  save() {
+    if (this.hero.id == 0) {
+      this.heroService.create(this.hero).subscribe();
+    } else {
+      this.heroService.update(this.hero).subscribe();
+    }
+
+    this.goBack();
   }
 
   goBack() {

@@ -28,12 +28,16 @@ export class HeroService {
       .pipe(tap((h) => this.log(`feched hero id. ${h.id}`)));
   }
 
-  save(hero?: Hero) {
-    this.messageService.add('HeroService: saved hero');
-    if (hero) {
-      return this.httpClient.put<Hero>(`${this.url}/${hero.id}`, hero);
-    }
-    return this.httpClient.post<Hero>(this.url, hero);
+  update(hero: Hero): Observable<Hero> {
+    return this.httpClient
+      .put<Hero>(`${this.url}/${hero.id}`, hero)
+      .pipe(tap((h) => this.log(`saved hero id. ${h.id}`)));
+  }
+
+  create(hero: Hero): Observable<Hero> {
+    return this.httpClient
+      .post<Hero>(this.url, hero)
+      .pipe(tap((h) => this.log(`created hero id. ${h.id}`)));
   }
 
   private log(message: string) {

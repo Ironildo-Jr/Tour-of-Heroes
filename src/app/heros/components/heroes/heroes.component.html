@@ -1,10 +1,20 @@
 <div class="card">
-  <h2>My Heroes</h2>
-  <div>
-    <ul class="heroes">
-      <li *ngFor="let h of heroes" [routerLink]="['/heroes/',h.id]">
-        <span>{{ h.id }}. </span>{{ h.name }}
-      </li>
-    </ul>
+  <div class="title">
+    <h2>My Heroes</h2>
+    <button routerLink="new" [queryParams]="{ length: this.heroes.length }">Add</button>
+  </div>
+
+  <div class="content">
+    <table class="heroes">
+      <tr>
+        <th>Id.</th>
+        <th>Name</th>
+      </tr>
+
+      <tr *ngFor="let h of heroes" [routerLink]="[h.id]" class="heroes row">
+        <td>{{ h.id }}</td>
+        <td>{{ h.name }}</td>
+      </tr>
+    </table>
   </div>
 </div>
