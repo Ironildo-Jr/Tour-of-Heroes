@@ -1,3 +1,21 @@
-.heroes li{
+#title {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin: 0px 10px;
+  padding: 0px 10px;
+}
+
+.heroes.row:hover {
   cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.heroes.row {
+  border-top: 10px solid black;
+}
+
+.heroes {
+  width: 100%;
+  text-align: center;
 }
