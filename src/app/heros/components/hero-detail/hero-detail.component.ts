@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Hero } from 'src/app/core/models/hero.model';
 import { HeroService } from 'src/app/core/services/hero.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-hero-detail',
@@ -10,11 +11,16 @@ import { HeroService } from 'src/app/core/services/hero.service';
   styleUrls: ['./hero-detail.component.css'],
 })
 export class HeroDetailComponent implements OnInit {
-  hero!: Hero;
-  isCreating!: boolean;
+  isCreating = true;
+  obj = {name: 'oi', preco: 0}
+  form = this.fb.group({
+    id: [{ value: 0, disabled: true }],
+    name: ['', [Validators.required, Validators.minLength(5)]],
+  });
 
   constructor(
     private heroService: HeroService,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private locale: Location
   ) {}
@@ -25,24 +31,28 @@ export class HeroDetailComponent implements OnInit {
 
   getHero() {
     const paramId = this.route.snapshot.paramMap.get('id');
-    if (paramId == 'new') {
-      this.isCreating = true;
-      this.hero = { id: 0, name: '' };
-    } else {
+    if (paramId != 'new') {
       this.isCreating = false;
       const id: number = Number(paramId);
-      this.heroService.getById(id).subscribe((x) => (this.hero = x));
+      this.heroService.getById(id).subscribe((x) => {
+        this.form.setValue(x);
+      });
     }
   }
 
   save() {
-    if (this.hero.id == 0) {
-      this.heroService.create(this.hero).subscribe();
-    } else {
-      this.heroService.update(this.hero).subscribe();
-    }
+    const { valid, controls } = this.form;
+    if (valid) {
+      if (controls['id'].value != 0) {
+        this.heroService
+          .update({ id: controls['id'].value, name: controls['name'].value })
+          .subscribe();
+      } else {
+        this.heroService.create({name: controls['name'].value } as Hero).subscribe();
+      }
 
-    this.goBack();
+      this.goBack();
+    }
   }
 
   goBack() {
