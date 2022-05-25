@@ -9,6 +9,7 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { PageNotFoundComponent } from './components/page-not-found/not-Found.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 const COMPONENTS = [ToolbarComponent, MessagesComponent, PageNotFoundComponent, LoadingComponent];
 
@@ -20,6 +21,11 @@ const COMPONENTS = [ToolbarComponent, MessagesComponent, PageNotFoundComponent, 
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     }
   ]
