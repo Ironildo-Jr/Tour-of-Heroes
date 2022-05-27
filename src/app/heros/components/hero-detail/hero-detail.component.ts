@@ -12,7 +12,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class HeroDetailComponent implements OnInit {
   isCreating = true;
-  obj = {name: 'oi', preco: 0}
   form = this.fb.group({
     id: [{ value: 0, disabled: true }],
     name: ['', [Validators.required, Validators.minLength(5)]],

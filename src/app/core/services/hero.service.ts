@@ -48,6 +48,12 @@ export class HeroService {
       );
   }
 
+  delete(id: Number) {
+    return this.httpClient
+      .delete(`${this.url}/${id}`)
+      .pipe(tap(() => this.log(`deleted hero id. ${id}`)));
+  }
+
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }

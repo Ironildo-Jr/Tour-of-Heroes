@@ -17,7 +17,7 @@ export class HeroesComponent implements OnInit {
   }
 
   onSelect(hero: Hero){
-
+    this.heroService.delete(hero.id).subscribe()
   }
 
   getHeros() {
