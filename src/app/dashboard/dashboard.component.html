@@ -3,3 +3,6 @@
     {{ h.name }}
   </div>
 </div>
+<div>
+  <app-search [label]="'Search'" (selected)="onSelect($event)"></app-search>
+</div>

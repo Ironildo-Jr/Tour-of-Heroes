@@ -1,0 +1,8 @@
+<div class="card">
+  <form>
+    <label for="search">{{ label }}:</label>
+    <input id="search" type="text" placeholder="Name" (input)="search(searchBox.value)" #searchBox/>
+    <button *ngIf="searchBox.value" (click)="searchBox.value=''">X</button>
+  </form>
+  <div *ngFor="let h of heroes$ | async" (click)="select(h)"> {{ h.name }}</div>
+</div>

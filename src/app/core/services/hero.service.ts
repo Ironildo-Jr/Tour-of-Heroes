@@ -40,6 +40,14 @@ export class HeroService {
       .pipe(tap((h) => this.log(`created hero id. ${h.id}`)));
   }
 
+  search(term: string): Observable<Hero[]> {
+    return this.httpClient
+      .get<Hero[]>(`${this.url}?name=${term}`)
+      .pipe(
+        tap((h) => this.log(`found ${h.length} hero(es) with name ${term}`))
+      );
+  }
+
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }

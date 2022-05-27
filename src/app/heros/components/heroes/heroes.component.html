@@ -6,6 +6,9 @@
     [queryParams]="{ length: this.heroes.length }"
   ></i>
 </div>
+<div>
+  <app-search [label]="'Search'" (selected)="onSelect($event)"></app-search>
+</div>
 <div class="card">
   <table class="heroes">
     <tr>
