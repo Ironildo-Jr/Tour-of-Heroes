@@ -1,6 +1,6 @@
-<app-toolbar [title]="title" [menuIcons]="menuIcons"></app-toolbar>
+<app-toolbar [title]="title" [menuIcons]="menuIcons" [isLogged]="isLogged$ | async"></app-toolbar>
 <main>
   <app-loading></app-loading>
   <router-outlet></router-outlet>
-  <app-messages></app-messages>
+  <app-messages *ngIf="isLogged$ | async"></app-messages>
 </main>

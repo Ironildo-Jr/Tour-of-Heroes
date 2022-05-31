@@ -1,12 +1,16 @@
 <header id="header">
   <h1>{{ title }}</h1>
-  <div>
+  <div *ngIf="isLogged">
     <div class="tooltip" *ngFor="let menuIcon of menuIcons">
       <i
         class="{{menuIcon.icon}} fa-lg icone"
         [routerLink]="[menuIcon.url]"
+        (click)="menuIcon.action()"
       ></i>
       <span class="tooltiptext">{{ menuIcon.toolTipText }}</span>
     </div>
+  </div>
+  <div *ngIf="!isLogged">
+    <h3>Login</h3>
   </div>
 </header>

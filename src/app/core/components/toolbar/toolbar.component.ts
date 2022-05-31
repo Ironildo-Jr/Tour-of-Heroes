@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { MenuIcon } from '../../models/menuIcon.model';
 
 @Component({
@@ -9,8 +10,13 @@ import { MenuIcon } from '../../models/menuIcon.model';
 export class ToolbarComponent implements OnInit {
   @Input() title: string = '';
   @Input() menuIcons: MenuIcon[] = [];
+  @Input() isLogged!: boolean | null;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
+
+  logout(){
+    this.authService.logout()
+  }
 }
